@@ -2848,9 +2848,6 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
 
             // Hide the tooltip popup element.
             function hide() {
-              // First things first: we don't show it anymore.
-              ttScope.isOpen = false;
-
               //if tooltip is going to be shown after delay, we must cancel this
               $timeout.cancel( popupTimeout );
               popupTimeout = null;
@@ -2895,6 +2892,9 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             }
 
             function removeTooltip() {
+              // First things first: we don't show it anymore.
+              ttScope.isOpen = false;
+
               transitionTimeout = null;
               if (tooltip) {
                 tooltip.remove();
