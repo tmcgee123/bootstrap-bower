@@ -1,5 +1,5 @@
 /* global FastClick, smoothScroll */
-angular.module('ui.bootstrap.demo', ['ui.bootstrap', 'plunker', 'ngTouch', 'ngAnimate'], function($httpProvider){
+angular.module('ui.bootstrap.demo', ['ui.bootstrap', 'plunker', 'ngTouch', 'ngAnimate', 'ngSanitize'], function($httpProvider){
   FastClick.attach(document.body);
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }).run(['$location', function($location){
@@ -20,7 +20,7 @@ angular.module('ui.bootstrap.demo', ['ui.bootstrap', 'plunker', 'ngTouch', 'ngAn
     get: function () {
       return $q.all({
         moduleMap: getModuleMap(),
-        rawFiles: getRawFiles(),
+        rawFiles: getRawFiles()
       });
     }
   };
@@ -46,9 +46,9 @@ angular.module('ui.bootstrap.demo', ['ui.bootstrap', 'plunker', 'ngTouch', 'ngAn
 .controller('SelectModulesCtrl', SelectModulesCtrl)
 .controller('DownloadCtrl', DownloadCtrl);
 
-function MainCtrl($scope, $http, $document, $modal, orderByFilter) {
+function MainCtrl($scope, $http, $document, $uibModal, orderByFilter) {
   $scope.showBuildModal = function() {
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'buildModal.html',
       controller: 'SelectModulesCtrl',
       resolve: {
@@ -63,7 +63,7 @@ function MainCtrl($scope, $http, $document, $modal, orderByFilter) {
   };
 
   $scope.showDownloadModal = function() {
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'downloadModal.html',
       controller: 'DownloadCtrl'
     });
@@ -285,7 +285,7 @@ var isOldBrowser;
      *   https://github.com/ssorallen/blob-feature-check/
      *   License: Public domain (http://unlicense.org)
      */
-    var url = window.webkitURL || window.URL; // Safari 6 uses "webkitURL".
+    var url = window.URL;
     var svg = new Blob(
         ['<svg xmlns=\'http://www.w3.org/2000/svg\'></svg>'],
         { type: 'image/svg+xml;charset=utf-8' }
